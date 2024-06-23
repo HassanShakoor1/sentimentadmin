@@ -20,37 +20,18 @@ import DownloadExcel from "../components/DownloadExel";
 import Papa from "papaparse";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Widgets from "../components/widgets";
+import { QRCode } from "react-qrcode-logo";
 
 const Home = () => {
+  const qrValue =
+    "https://66785ce602ce93d7a99beecf--frolicking-mousse-188e81.netlify.app/";
   let [mylist, setmylist] = useState([]);
-  let [csvFile, setCsvFile] = useState(null);
-  const [lastRecordKey, setLastRecordKey] = useState(null);
-  let uploadBulk = (value) => {
-    Papa.parse(value, {
-      header: true,
-      complete: (result) => {
-        // result.data contains the array of objects
-        let theCsvData = result.data;
-        theCsvData?.map((elm) => {
-          var pushkey = push(ref(db, `Records/`), elm).key;
-          update(ref(db, `Records/${pushkey}`), { id: pushkey })
-            .then(() => {
-              // console.log("submited");
-              toast?.success("Submited successfuly");
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
-
-        // setData(result.data);
-      },
-    });
-  };
+  const [userTag, setUserTag] = useState(null);
   useEffect(() => {
     let getingdata = async () => {
-      const starCountRef1 = ref(db, "/Records");
-      const starCountRef = query(ref(db, "/Records"), limitToFirst(1000));
+      const starCountRef1 = ref(db, "/Tags");
+      const starCountRef = query(ref(db, "/Tags"), limitToFirst(1000));
       onValue(starCountRef, async (snapshot) => {
         const data = await snapshot.val();
         console.log(data);
@@ -77,6 +58,24 @@ const Home = () => {
 
     getingdata();
   }, []);
+
+  useEffect(() => {
+    if (userTag != null) {
+      const canvas = document.getElementById("download-qr");
+      if (canvas) {
+        const pngUrl = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = `QR_Code.png`;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        setUserTag(null);
+      }
+    }
+  }, [userTag]);
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -118,13 +117,11 @@ const Home = () => {
   let [delid, setdelid] = useState();
 
   const handleDelete = () => {
-    remove(ref(db, `/Records/${delid}`)).then(() => {
+    remove(ref(db, `/Tags/${delid}`)).then(() => {
       toast?.success("Data deleted successfuly");
     });
     setdelid("");
   };
-
-  let [isEdit, setisedit] = useState(false);
 
   // console.log(mylist);
 
@@ -151,202 +148,82 @@ const Home = () => {
   };
   let therole = localStorage.getItem("inventoryrole");
   const columns = [
-    // {
-    //   name: "Sr",
-    //   selector: (_, index) => index + 1,
-    //   sortable: false,
-    //   width: "60px",
-    // },
     {
-      name: "Name",
+      name: "Sr",
+      selector: (_, index) => index + 1,
+      sortable: false,
+    },
+    {
+      name: "Tag Id",
       selector: (row) => {
-        return (
-          <Tooltip
-            title={row.name}
-            className="cursor-pointer"
-            placement="bottom-start"
+        return row.tagId;
+      },
+      sortable: true,
+    },
+    {
+      name: "Assigned To",
+      selector: (row) => {
+        return row.userName;
+      },
+      width: "200px",
+    },
+
+    {
+      name: "QR-code",
+      cell: (row) => (
+        <div className="flex ">
+          <button
+            className="h-[40px] w-[70px] border bg-[#0b567f] rounded-md text-white "
+            onClick={() => {
+              setUserTag(row?.tagId);
+            }}
           >
-            {row.name}
-          </Tooltip>
-        );
-      },
-      sortable: true,
-      width: "150px",
-    },
-    {
-      name: "Category 1",
-      selector: (row) => {
-        return row.category_1;
-      },
-      sortable: true,
-      width: "120px",
-    },
-    {
-      name: "Category 2",
-      selector: (row) => {
-        return row.category_2;
-      },
+            Download
+          </button>
+        </div>
+      ),
+
       sortable: true,
     },
+
     {
-      name: "Category 3",
-      selector: (row) => {
-        return row.category_3;
-      },
+      name: "Status",
+      cell: (row) => (
+        <div className="flex ">
+          {row.status ? (
+            <button
+              className="h-[40px] w-[70px] border bg-green-500 rounded-md text-white "
+              onClick={() => {}}
+            >
+              Active
+            </button>
+          ) : (
+            <button className="h-[40px] w-[70px] border bg-[#f44336] rounded-md text-white cursor-default">
+              In Active
+            </button>
+          )}
+        </div>
+      ),
+
       sortable: true,
     },
+
     {
-      name: "Price",
-      selector: (row) => {
-        return row.price;
-      },
-      sortable: true,
-      width: "150px",
-    },
-    {
-      name: "Sku",
-      selector: (row) => {
-        return row.sku;
-      },
-      sortable: true,
-    },
-    {
-      name: "Description",
-      selector: (row) => {
-        return (
-          <Tooltip
-            title={row.item_description}
-            className="cursor-pointer"
-            placement="bottom-start"
+      name: "Actions",
+      cell: (row) => (
+        <div className="flex ">
+          <button
+            className="h-[40px] w-[70px] border bg-[#f44336] rounded-md text-white"
+            onClick={() => {
+              return handleDelModal(), setdelid(row.id);
+            }}
           >
-            {row.item_description}
-          </Tooltip>
-        );
-      },
-      width: "150px",
-      sortable: true,
-    },
-    {
-      name: "Address",
-      selector: (row) => {
-        return (
-          <Tooltip
-            title={row.location}
-            className="cursor-pointer"
-            placement="bottom-start"
-          >
-            {row.location}
-          </Tooltip>
-        );
-      },
-      sortable: true,
-    },
-    {
-      name: "Vendor",
-      selector: (row) => {
-        return (
-          <Tooltip
-            title={row.vendor}
-            className="cursor-pointer"
-            placement="bottom-start"
-          >
-            {row.vendor}
-          </Tooltip>
-        );
-      },
-      sortable: true,
-    },
-    {
-      name: "Image 1",
-      selector: (row) => {
-        return (
-          <>
-            {" "}
-            <div className="h-[65px] w-[65px] flex justify-center items-center">
-              <img
-                src={row?.pic_1 ? row?.pic_1 : "https://placehold.co/58x58"}
-                alt=""
-                className="h-[60px] w-[60px] rounded-lg object-cover"
-              />
-            </div>
-          </>
-        );
-      },
-      sortable: true,
-      width: "150px",
-    },
-    {
-      name: "Image 2",
-      selector: (row) => {
-        return (
-          <>
-            {" "}
-            <div className="h-[65px] w-[65px] flex justify-center items-center">
-              <img
-                src={row?.pic_2 ? row?.pic_2 : "https://placehold.co/58x58"}
-                alt=""
-                className="h-[60px] w-[60px] rounded-lg object-cover"
-              />
-            </div>
-          </>
-        );
-      },
-      sortable: true,
-      width: "150px",
-    },
-    {
-      name: "Image 3",
-      selector: (row) => {
-        return (
-          <>
-            {" "}
-            <div className="h-[65px] w-[65px] flex justify-center items-center">
-              <img
-                src={row?.pic_3 ? row?.pic_3 : "https://placehold.co/58x58"}
-                alt=""
-                className="h-[60px] w-[60px] rounded-lg object-cover"
-              />
-            </div>
-          </>
-        );
-      },
-      sortable: true,
-      width: "150px",
-    },
-    {
-      name: "Stock",
-      selector: (row) => {
-        return row.stock;
-      },
-      sortable: true,
-      width: "150px",
-    },
-    {
-      name: therole === "admin" ? "Actions" : null,
-      cell:
-        therole === "admin"
-          ? (row) => (
-              <div className="flex ">
-                <button
-                  className="h-[40px] w-[70px] border bg-[#35A1CC] rounded-md text-white mr-2"
-                  onClick={() => {
-                    handleDataForm(), setFormData(row), setisedit(true);
-                  }}
-                >
-                  Edit
-                </button>{" "}
-                <button
-                  className="h-[40px] w-[70px] border bg-[#f44336] rounded-md text-white"
-                  onClick={() => {
-                    return handleDelModal(), setdelid(row.id);
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            )
-          : null,
-      width: therole === "admin" ? "175px" : "0px",
+            Delete
+          </button>
+        </div>
+      ),
+
+      width: "175px",
     },
   ];
   const [search, setsearch] = useState("");
@@ -355,7 +232,7 @@ const Home = () => {
 
   useEffect(() => {
     const result = mylist.filter((user) => {
-      return user.name?.toLowerCase().match(search.toLowerCase());
+      return user.tagId?.toLowerCase().match(search.toLowerCase());
     });
 
     setfiltered(result);
@@ -365,13 +242,10 @@ const Home = () => {
     <div className="w-[100%] flex max-h-[100vh] ">
       <Sidebar />
       <div className="w-[85%] h-[100vh] overflow-y-scroll">
-        <AddProductModal
-          DataForm={DataForm}
-          handleDataForm={handleDataForm}
-          formData={formData}
-          setFormData={setFormData}
-          isEdit={isEdit}
-        />
+        <div style={{ display: "none" }}>
+          <QRCode id="download-qr" value={qrValue + userTag} size={150} />
+        </div>
+
         <DellModal
           handleDelModal={handleDelModal}
           DelModal={DelModal}
@@ -380,6 +254,7 @@ const Home = () => {
         <div className="   ml-[45px] mt-[60px] relative ">
           {/* <Widgets /> */}
           {/* <h2 className='text-xl font-[500]] mb-[20px]'>{`All users[${mylist.length}]`}</h2> */}
+          <Widgets tags={mylist} />
           <div className="border w-[95%] overflow-x-scroll">
             <DataTable
               columns={columns}
@@ -401,41 +276,7 @@ const Home = () => {
                       setsearch(e.target.value);
                     }}
                   />{" "}
-                  <div className="w-[35%]  h-[70px] flex items-center justify-around">
-                    {therole === "admin" ? (
-                      <>
-                        <div
-                          className="w-[25%] h-[40px]  flex justify-center items-center text-white hover:bg-[#b2d9ee] bg-[#0b567f] rounded-lg cursor-pointer"
-                          onClick={() => {
-                            handleDataForm(), setisedit(false);
-                          }}
-                        >
-                          Add
-                        </div>
-
-                        <label
-                          htmlFor="fileSelect"
-                          className="w-[35%] h-[40px]"
-                        >
-                          <input
-                            id="fileSelect"
-                            type="file"
-                            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                            className="opacity-0"
-                            style={{ display: "none" }}
-                            onChange={(e) => uploadBulk(e.target.files[0])}
-                          />
-                          <div className="w-[100%] h-[100%]  flex justify-center items-center text-white hover:bg-[#b2d9ee] bg-[#0b567f] rounded-lg cursor-pointer">
-                            Bulk Upload
-                          </div>
-                        </label>
-                      </>
-                    ) : (
-                      <>
-                        <div className="w-[25%]"></div>
-                        <div className="w-[35%]"></div>
-                      </>
-                    )}
+                  <div className="w-[35%]  h-[70px] flex items-center justify-end">
                     <div className="w-[25%] h-[40px]  flex justify-center items-center text-white hover:bg-[#b2d9ee] bg-[#0b567f] rounded-lg cursor-pointer">
                       <DownloadExcel Data={filtered} />
                     </div>

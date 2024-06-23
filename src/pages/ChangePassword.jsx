@@ -1,18 +1,28 @@
 // ChangePassword.js
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
-import { auth } from "../Firebase";
+import { auth, db } from "../Firebase";
 import {
   EmailAuthProvider,
   reauthenticateWithCredential,
   updatePassword,
 } from "firebase/auth";
 import { toast } from "react-toastify";
+import { onValue, ref, update } from "firebase/database";
 
 const ChangePassword = () => {
+  const [actualPassword, setActualPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+
+  useEffect(() => {
+    const starCountRef1 = ref(db, `/Admin`);
+    onValue(starCountRef1, async (snapshot) => {
+      const data = await snapshot.val();
+      setActualPassword(data?.password);
+    });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,30 +35,22 @@ const ChangePassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    auth.onAuthStateChanged(function (user) {
-      if (user) {
-        var credentials = EmailAuthProvider.credential(
-          user?.email,
-          oldPassword
-        );
-        reauthenticateWithCredential(user, credentials)
-          .then(function () {
-            updatePassword(user, newPassword)
-              .then(function () {
-                setOldPassword("");
-                setNewPassword("");
-                toast.success("Password changed successfuly");
-              })
-              .catch(function (error) {
-                toast.error("Something went wrong");
-              });
-          })
-          .catch(function (error) {
-            toast.error("Old password is incorrect");
-          });
+    if (oldPassword && newPassword) {
+      if (oldPassword === actualPassword) {
+        update(ref(db, `Admin/`), {
+          password: newPassword,
+        }).then(() => {
+          toast.success("Password updated successfuly");
+          setNewPassword("");
+          setOldPassword("");
+          // setLoading(false);
+        });
+      } else {
+        toast.error("Your old password is incorrect");
       }
-    });
+    } else {
+      toast.error("Both fields are required");
+    }
   };
 
   return (

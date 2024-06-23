@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { BsBox2Fill } from "react-icons/bs";
 import logo from "../img/logo.png";
 import { FaKey } from "react-icons/fa6";
+import { IoPricetags } from "react-icons/io5";
+import { MdOutlinePlaylistAdd } from "react-icons/md";
+import { RiFileExcel2Fill } from "react-icons/ri";
+import { FaFileImport } from "react-icons/fa";
 
 const Sidebar = () => {
   let navigate = useNavigate();
@@ -34,7 +38,7 @@ const Sidebar = () => {
 
   let logOut = () => {
     let promise = new Promise((res, rej) => {
-      res(localStorage.removeItem("inventoryKey"));
+      res(localStorage.removeItem("sentimentadmin"));
     });
 
     promise.then(() => {
@@ -49,33 +53,14 @@ const Sidebar = () => {
   return (
     <div className="w-[15%] max-h-[100vh] border-r flex flex-col sticky">
       <div className="h-[90vh]  w-[100%] flex flex-col justify-between items-center">
-        <div className="h-[70%]  w-[90%] flex flex-col">
-          <div className="h-[15%]  w-[100%] flex items-center ">
-            <img src={logo} alt="logo" className="h-[40px] w-[40px]" />
-            <h2 class=" text-xl font-medium  text-black">Inventory</h2>
+        <div className="h-[75%]  w-[90%] flex flex-col">
+          <div className="  w-[100%] flex justify-center mt-[20px]">
+            <img src={logo} alt="logo" />
+            {/* <h2 class=" text-xl font-medium  text-black">Inventory</h2> */}
           </div>
-          <div className="h-[30%]  w-[100%] flex flex-col justify-evenly  mt-5">
-            {/* {user?.isAdmin && ( */}
-            {/* <div
-              style={user?.isAdmin === true ? { display: "none" } : null}
-              className="h-[100%]  w-[100%]"
-            > */}
-            {/* <div
-              className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[12%]  w-[100%] rounded-md flex items-center"
-              onClick={() => navigate("/dashboard")}
-              style={
-                currentPath.includes("/dashboard")
-                  ? { backgroundColor: "#b2d9ee" }
-                  : null
-              }
-            >
-              <div className=" flex items-center rounded-md hover:bg-[#b2d9ee] hover:text-[#0b567f] cursor-pointer">
-                <MdDashboard className="text-[#0b567f] text-xl ml-2 " />
-                <p className="ml-[10px] text-base ">Dashboard</p>
-              </div>
-            </div> */}
-            {/* </div> */}
-            {/* )} */}
+          <div className="h-[70%]  w-[100%] flex flex-col gap-5  mt-5">
+            
+
             <div
               className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/home")}
@@ -86,27 +71,58 @@ const Sidebar = () => {
               }
             >
               <div className=" flex items-center rounded-md hover:bg-[#b2d9ee] hover:text-[#0b567f] cursor-pointer">
-                <BsBox2Fill className="text-[#0b567f] text-xl ml-2 " />
-                <p className="ml-[10px] text-[14px] font-[500]">Products</p>
+                <IoPricetags className="text-[#0b567f] text-xl ml-2 " />
+                <p className="ml-[10px] text-[14px] font-[500]">Tags</p>
               </div>
             </div>
 
-            {therole === "admin" ? (
-              <div
-                className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[30%]  w-[100%] rounded-md flex items-center"
-                onClick={() => navigate("/allusers")}
-                style={
-                  currentPath.includes("/allusers")
-                    ? { backgroundColor: "#b2d9ee" }
-                    : null
-                }
-              >
-                <div className=" flex items-center rounded-md hover:bg-[#b2d9ee] hover:text-[#0b567f] cursor-pointer">
-                  <BsFillPeopleFill className="text-[#0b567f] text-xl ml-2 " />
-                  <p className="ml-[10px] text-[14px] font-[500]">Users</p>
-                </div>
+            <div
+              className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[30%]  w-[100%] rounded-md flex items-center"
+              onClick={() => navigate("/addTag")}
+              style={
+                currentPath.includes("/addTag")
+                  ? { backgroundColor: "#b2d9ee" }
+                  : null
+              }
+            >
+              <div className=" flex items-center rounded-md hover:bg-[#b2d9ee] hover:text-[#0b567f] cursor-pointer">
+                <MdOutlinePlaylistAdd className="text-[#0b567f] text-2xl ml-2 " />
+                <p className="ml-[5px] text-[14px] font-[500]">Add Tag</p>
               </div>
-            ) : null}
+            </div>
+
+            <div
+              className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[30%]  w-[100%] rounded-md flex items-center"
+              onClick={() => navigate("/generate")}
+              style={
+                currentPath.includes("/generate")
+                  ? { backgroundColor: "#b2d9ee" }
+                  : null
+              }
+            >
+              <div className=" flex items-center rounded-md hover:bg-[#b2d9ee] hover:text-[#0b567f] cursor-pointer">
+                <RiFileExcel2Fill className="text-[#0b567f] text-xl ml-2 " />
+                <p className="ml-[10px] text-[14px] font-[500]">
+                  Generate Tags
+                </p>
+              </div>
+            </div>
+
+            <div
+              className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[30%]  w-[100%] rounded-md flex items-center"
+              onClick={() => navigate("/import")}
+              style={
+                currentPath.includes("/import")
+                  ? { backgroundColor: "#b2d9ee" }
+                  : null
+              }
+            >
+              <div className=" flex items-center rounded-md hover:bg-[#b2d9ee] hover:text-[#0b567f] cursor-pointer">
+                <FaFileImport className="text-[#0b567f] text-xl ml-2 " />
+                <p className="ml-[10px] text-[14px] font-[500]">Import Tags</p>
+              </div>
+            </div>
+
             <div
               className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/changepass")}

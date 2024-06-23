@@ -21,33 +21,13 @@ import Papa from "papaparse";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddUserModal from "../components/AddUserModal";
+import { QRCode } from "react-qrcode-logo";
 
 const Users = () => {
   let [mylist, setmylist] = useState([]);
   let [csvFile, setCsvFile] = useState(null);
   const [lastRecordKey, setLastRecordKey] = useState(null);
-  let uploadBulk = (value) => {
-    Papa.parse(value, {
-      header: true,
-      complete: (result) => {
-        // result.data contains the array of objects
-        let theCsvData = result.data;
-        theCsvData?.map((elm) => {
-          var pushkey = push(ref(db, `Records/`), elm).key;
-          update(ref(db, `Records/${pushkey}`), { id: pushkey })
-            .then(() => {
-              // console.log("submited");
-              toast?.success("Submited successfuly");
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
 
-        // setData(result.data);
-      },
-    });
-  };
   useEffect(() => {
     let getingdata = async () => {
       const starCountRef = ref(db, "/User");
@@ -118,9 +98,9 @@ const Users = () => {
   let [delid, setdelid] = useState();
 
   const handleDelete = () => {
-    remove(ref(db, `/Records/${delid}`)).then(() => {
-      toast?.success("Data deleted successfuly");
-    });
+    // remove(ref(db, `/Records/${delid}`)).then(() => {
+    //   toast?.success("Data deleted successfuly");
+    // });
     setdelid("");
   };
 
@@ -140,22 +120,29 @@ const Users = () => {
     //   selector: (_, index) => index + 1,
     //   sortable: false,
     //   width: "60px",
+
     // },
+
+    {
+      name: "#",
+      cell: (row, index) => index + 1,
+      width: "70px",
+    },
     {
       name: "name",
       selector: (row) => {
         return (
           <Tooltip
-            title={row.name}
+            title={row.firstName + " " + row.lastName}
             className="cursor-pointer"
             placement="bottom-start"
           >
-            {row.name}
+            {row.firstName + " " + row.lastName}
           </Tooltip>
         );
       },
       sortable: true,
-      width: "150px",
+      // width: "200px",
     },
     {
       name: "Email",
@@ -163,28 +150,55 @@ const Users = () => {
         return row.email;
       },
       sortable: true,
-      width: "200px",
+      // width: "200px",
     },
 
+    // {
+    //   name: "QR-Code",
+    //   selector: (row) => {
+    //     return (
+    //       <>
+    //         <QRCode id={row?.id} value="www.zain.com" size={50} />
+    //       </>
+    //     );
+    //   },
+    //   sortable: true,
+    // },
     {
-      name: "Role",
-      selector: (row) => {
-        return row.role;
-      },
-      sortable: true,
-    },
-    {
-      name: "",
+      name: "Status",
       cell: (row) => (
         <div className="flex ">
           <button
+            className="h-[40px] w-[70px] border bg-green-500 rounded-md text-white "
+            onClick={() => {}}
+          >
+            Active
+          </button>{" "}
+          {/* <button
+            className="h-[40px] w-[70px] border bg-[#f44336] rounded-md text-white"
+            onClick={() => {
+              return handleDelModal(), setdelid(row.id);
+            }}
+          >
+            Delete
+          </button> */}
+        </div>
+      ),
+
+      sortable: true,
+    },
+    {
+      name: "Actions",
+      cell: (row) => (
+        <div className="flex ">
+          {/* <button
             className="h-[40px] w-[70px] border bg-[#35A1CC] rounded-md text-white mr-2"
             onClick={() => {
               handleaddForm(), setData(row), setisuserEdit(true);
             }}
           >
-            Edit
-          </button>{" "}
+            View
+          </button>{" "} */}
           <button
             className="h-[40px] w-[70px] border bg-[#f44336] rounded-md text-white"
             onClick={() => {
@@ -195,7 +209,7 @@ const Users = () => {
           </button>
         </div>
       ),
-      width: "175px",
+      // width: "175px",
     },
 
     // {
@@ -338,7 +352,7 @@ const Users = () => {
 
   useEffect(() => {
     const result = mylist.filter((user) => {
-      return user.name?.toLowerCase().match(search.toLowerCase());
+      return user.firstName?.toLowerCase().match(search.toLowerCase());
     });
 
     setfiltered(result);
@@ -406,31 +420,18 @@ const Users = () => {
                     }}
                   />{" "}
                   <div className="w-[35%]  h-[70px] flex items-center justify-end ">
-                    <div
+                    {/* <div
                       className="w-[25%] h-[40px]  flex justify-center items-center text-white hover:bg-[#b2d9ee] bg-[#0b567f] rounded-lg cursor-pointer"
                       onClick={() => {
                         handleaddForm(), setisuserEdit(false);
                       }}
                     >
                       Add
-                    </div>
-                    {/* <label htmlFor="fileSelect" className="w-[35%] h-[40px]">
-                      <input
-                        id="fileSelect"
-                        type="file"
-                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                        className="opacity-0"
-                        style={{ display: "none" }}
-                        onChange={(e) => uploadBulk(e.target.files[0])}
-                      />
-                      <div className="w-[100%] h-[100%]  flex justify-center items-center text-white hover:bg-[#b2d9ee] bg-[#0b567f] rounded-lg cursor-pointer">
-                        Bulk Upload
-                      </div>
-                    </label> */}
-
-                    {/* <div className="w-[25%] h-[40px]  flex justify-center items-center text-white hover:bg-[#b2d9ee] bg-[#0b567f] rounded-lg cursor-pointer">
-                      <DownloadExcel Data={filtered} />
                     </div> */}
+
+                    <div className="w-[25%] h-[40px]  flex justify-center items-center text-white hover:bg-[#b2d9ee] bg-[#0b567f] rounded-lg cursor-pointer">
+                      <DownloadExcel Data={filtered} />
+                    </div>
                   </div>
                 </div>
               }

@@ -5,19 +5,12 @@ const DownloadExcel = ({ Data }) => {
   console.log(Data);
   const csvData = Data.map((item) => {
     return {
-      name: item.name,
-      category_1: item.category_1,
-      category_2: item.category_2,
-      category_3: item.category_3,
-      price: item.price,
-      sku: item.sku,
-      item_description: item?.item_description,
-      location: item?.location,
-      vendor: item?.vendor,
-      stock: item?.stock,
-      pic_1: item?.pic_1,
-      pic_2: item?.pic_2,
-      pic_3: item?.pic_3,
+      Tag_Id: item?.tagId,
+      QR:
+        "https://66785ce602ce93d7a99beecf--frolicking-mousse-188e81.netlify.app/qr/" +
+        item?.tagId,
+      Status: item?.Status,
+      User_Name: item?.userName,
     };
   });
   return (
