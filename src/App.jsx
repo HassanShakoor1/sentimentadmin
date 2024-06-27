@@ -17,7 +17,7 @@ function App() {
   };
 
   const RequireAuthlogin = ({ children }) => {
-    return !theToken ? children : <Navigate to="/allusers" />;
+    return !theToken ? children : <Navigate to="/home" />;
   };
   return (
     <>

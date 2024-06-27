@@ -25,6 +25,7 @@ import { saveAs } from "file-saver";
 import Papa from "papaparse";
 
 const generateUniqueRandomNumbers = (count) => {
+  let baseUrl = import.meta.env.VITE_PROFILE_URL;
   const numbers = new Set();
 
   while (numbers.size < count) {
@@ -34,8 +35,9 @@ const generateUniqueRandomNumbers = (count) => {
 
   return Array.from(numbers).map((number) => ({
     tagId: number,
-    userid: "",
+    url: baseUrl + "viewprofile/" + number,
     status: false,
+    Qr: baseUrl + "qr/" + number,
   }));
 };
 
@@ -89,7 +91,7 @@ const Generate = () => {
 
           <button
             // type="submit"
-            className=" text-white rounded h-[40px] w-[100px] py-2 px-4 hover:bg-[#b2d9ee] bg-[#0b567f] focus:outline-none focus:shadow-outline-blue mt-3"
+            className=" text-white rounded h-[40px] w-[100px] py-2 px-4 hover:bg-[#b2d9ee] bg-[#B08655] focus:outline-none focus:shadow-outline-blue mt-3"
             onClick={() => generateTags()}
           >
             {loading ? (

@@ -27,7 +27,7 @@ const Widgets = ({ tags }) => {
       {
         label: "Total Sites",
         data: [allusers],
-        backgroundColor: ["#0b567f"],
+        backgroundColor: ["#B08655"],
       },
     ],
   };
@@ -37,7 +37,7 @@ const Widgets = ({ tags }) => {
     datasets: [
       {
         data: [allusers, activeUsers],
-        backgroundColor: ["#0b567f", "#00c867"],
+        backgroundColor: ["#B08655", "#00c867"],
       },
     ],
   };
@@ -47,7 +47,7 @@ const Widgets = ({ tags }) => {
     datasets: [
       {
         data: [allusers, notActiveUsers],
-        backgroundColor: ["#0b567f", "red"],
+        backgroundColor: ["#B08655", "red"],
       },
     ],
   };

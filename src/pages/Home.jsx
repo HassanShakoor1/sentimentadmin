@@ -22,10 +22,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Widgets from "../components/widgets";
 import { QRCode } from "react-qrcode-logo";
+import { LuDownload } from "react-icons/lu";
 
 const Home = () => {
-  const qrValue =
-    "https://66785ce602ce93d7a99beecf--frolicking-mousse-188e81.netlify.app/";
+  const qrValue = import.meta.env.VITE_PROFILE_URL;
   let [mylist, setmylist] = useState([]);
   const [userTag, setUserTag] = useState(null);
   useEffect(() => {
@@ -163,7 +163,7 @@ const Home = () => {
     {
       name: "Assigned To",
       selector: (row) => {
-        return row.userName;
+        return row.userid;
       },
       width: "200px",
     },
@@ -173,12 +173,13 @@ const Home = () => {
       cell: (row) => (
         <div className="flex ">
           <button
-            className="h-[40px] w-[70px] border bg-[#0b567f] rounded-md text-white "
+            className="h-[40px] w-[100px] border bg-[#B08655] rounded-md text-white flex gap-1 justify-center items-center  "
             onClick={() => {
               setUserTag(row?.tagId);
             }}
           >
             Download
+            <LuDownload />
           </button>
         </div>
       ),
@@ -243,7 +244,11 @@ const Home = () => {
       <Sidebar />
       <div className="w-[85%] h-[100vh] overflow-y-scroll">
         <div style={{ display: "none" }}>
-          <QRCode id="download-qr" value={qrValue + userTag} size={150} />
+          <QRCode
+            id="download-qr"
+            value={qrValue + "viewprofile/" + userTag}
+            size={150}
+          />
         </div>
 
         <DellModal
@@ -277,7 +282,7 @@ const Home = () => {
                     }}
                   />{" "}
                   <div className="w-[35%]  h-[70px] flex items-center justify-end">
-                    <div className="w-[25%] h-[40px]  flex justify-center items-center text-white hover:bg-[#b2d9ee] bg-[#0b567f] rounded-lg cursor-pointer">
+                    <div className="w-[25%] h-[40px]  flex justify-center items-center text-white hover:bg-[#b2d9ee] bg-[#B08655] rounded-lg cursor-pointer">
                       <DownloadExcel Data={filtered} />
                     </div>
                   </div>

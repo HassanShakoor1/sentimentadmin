@@ -124,7 +124,7 @@ const AddTag = () => {
           </div>
           <button
             // type="submit"
-            className=" text-white rounded py-2 px-4 hover:bg-[#b2d9ee] bg-[#0b567f] focus:outline-none focus:shadow-outline-blue"
+            className=" text-white rounded py-2 px-4  bg-[#B08655] focus:outline-none focus:shadow-outline-blue"
             onClick={() => addNewTag()}
           >
             {loading ? <CircularProgress color="inherit" /> : "Save Tag"}

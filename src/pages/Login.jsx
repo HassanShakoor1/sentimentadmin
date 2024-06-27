@@ -59,7 +59,7 @@ const LoginForm = () => {
           <button
             type="button"
             onClick={handleLogin}
-            className="w-full hover:bg-[#b2d9ee] bg-[#0b567f] text-white p-2 rounded-md  transition"
+            className="w-full hover:bg-[#b2d9ee] bg-[#B08655] text-white p-2 rounded-md  transition"
           >
             Login
           </button>

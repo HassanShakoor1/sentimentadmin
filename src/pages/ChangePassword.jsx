@@ -96,7 +96,7 @@ const ChangePassword = () => {
             </div>
             <button
               type="submit"
-              className=" text-white rounded py-2 px-4 hover:bg-[#b2d9ee] bg-[#0b567f] focus:outline-none focus:shadow-outline-blue"
+              className=" text-white rounded py-2 px-4 hover:bg-[#b2d9ee] bg-[#B08655] focus:outline-none focus:shadow-outline-blue"
             >
               Change Password
             </button>

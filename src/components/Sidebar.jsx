@@ -59,49 +59,47 @@ const Sidebar = () => {
             {/* <h2 class=" text-xl font-medium  text-black">Inventory</h2> */}
           </div>
           <div className="h-[70%]  w-[100%] flex flex-col gap-5  mt-5">
-            
-
             <div
-              className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[30%]  w-[100%] rounded-md flex items-center"
+              className="hover:bg-[#000000] hover:text-[#B08655] h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/home")}
               style={
                 currentPath.includes("/home")
-                  ? { backgroundColor: "#b2d9ee" }
+                  ? { backgroundColor: "#000000", color: "#B08655" }
                   : null
               }
             >
-              <div className=" flex items-center rounded-md hover:bg-[#b2d9ee] hover:text-[#0b567f] cursor-pointer">
-                <IoPricetags className="text-[#0b567f] text-xl ml-2 " />
+              <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
+                <IoPricetags className="text-[#B08655] text-xl ml-2 " />
                 <p className="ml-[10px] text-[14px] font-[500]">Tags</p>
               </div>
             </div>
 
             <div
-              className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[30%]  w-[100%] rounded-md flex items-center"
+              className="hover:bg-[#000000] hover:text-[#B08655] h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/addTag")}
               style={
                 currentPath.includes("/addTag")
-                  ? { backgroundColor: "#b2d9ee" }
+                  ? { backgroundColor: "#000000", color: "#B08655" }
                   : null
               }
             >
-              <div className=" flex items-center rounded-md hover:bg-[#b2d9ee] hover:text-[#0b567f] cursor-pointer">
-                <MdOutlinePlaylistAdd className="text-[#0b567f] text-2xl ml-2 " />
+              <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
+                <MdOutlinePlaylistAdd className="text-[#B08655] text-2xl ml-2 " />
                 <p className="ml-[5px] text-[14px] font-[500]">Add Tag</p>
               </div>
             </div>
 
             <div
-              className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[30%]  w-[100%] rounded-md flex items-center"
+              className="hover:bg-[#000000] hover:text-[#B08655] h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/generate")}
               style={
                 currentPath.includes("/generate")
-                  ? { backgroundColor: "#b2d9ee" }
+                  ? { backgroundColor: "#000000", color: "#B08655" }
                   : null
               }
             >
-              <div className=" flex items-center rounded-md hover:bg-[#b2d9ee] hover:text-[#0b567f] cursor-pointer">
-                <RiFileExcel2Fill className="text-[#0b567f] text-xl ml-2 " />
+              <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
+                <RiFileExcel2Fill className="text-[#B08655] text-xl ml-2 " />
                 <p className="ml-[10px] text-[14px] font-[500]">
                   Generate Tags
                 </p>
@@ -109,31 +107,31 @@ const Sidebar = () => {
             </div>
 
             <div
-              className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[30%]  w-[100%] rounded-md flex items-center"
+              className="hover:bg-[#000000] hover:text-[#B08655] h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/import")}
               style={
                 currentPath.includes("/import")
-                  ? { backgroundColor: "#b2d9ee" }
+                  ? { backgroundColor: "#000000", color: "#B08655" }
                   : null
               }
             >
-              <div className=" flex items-center rounded-md hover:bg-[#b2d9ee] hover:text-[#0b567f] cursor-pointer">
-                <FaFileImport className="text-[#0b567f] text-xl ml-2 " />
+              <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
+                <FaFileImport className="text-[#B08655] text-xl ml-2 " />
                 <p className="ml-[10px] text-[14px] font-[500]">Import Tags</p>
               </div>
             </div>
 
             <div
-              className="hover:bg-[#b2d9ee] hover:text-[#0b567f] h-[30%]  w-[100%] rounded-md flex items-center"
+              className="hover:bg-[#000000] hover:text-[#B08655] h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/changepass")}
               style={
                 currentPath.includes("/changepass")
-                  ? { backgroundColor: "#b2d9ee" }
+                  ? { backgroundColor: "#000000", color: "#B08655" }
                   : null
               }
             >
-              <div className=" flex items-center rounded-md hover:bg-[#b2d9ee] hover:text-[#0b567f] cursor-pointer">
-                <FaKey className="text-[#0b567f] text-xl ml-2 " />
+              <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
+                <FaKey className="text-[#B08655] text-xl ml-2 " />
                 <p className="ml-[10px] text-[14px] font-[500]">
                   Change Password
                 </p>
