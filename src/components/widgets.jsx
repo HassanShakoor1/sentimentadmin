@@ -25,7 +25,7 @@ const Widgets = ({ tags }) => {
   const data1 = {
     datasets: [
       {
-        label: "Total Sites",
+        label: "Total profiles",
         data: [allusers],
         backgroundColor: ["#B08655"],
       },
@@ -33,7 +33,7 @@ const Widgets = ({ tags }) => {
   };
 
   const data2 = {
-    labels: ["Total tags", "Active tags"],
+    labels: ["Total Profiles", "Active profiles"],
     datasets: [
       {
         data: [allusers, activeUsers],
@@ -43,7 +43,7 @@ const Widgets = ({ tags }) => {
   };
 
   const data3 = {
-    labels: ["Total", "Inactive tags"],
+    labels: ["Total Profiles", "Inactive profiles"],
     datasets: [
       {
         data: [allusers, notActiveUsers],
@@ -57,14 +57,14 @@ const Widgets = ({ tags }) => {
       {/* <h2 className='text-2xl font-[500] ml-[50px] mt-6'>Overview</h2> */}
       <div className="flex justify-around flex-wrap mt-6 w-[1000px] h-[180px] ">
         <div className="h-[150px] w-[240px]   rounded-lg bg-[#ffffff]  shadow-md border">
-          <p className="font-[450] mt-2 ml-[10px] text-xl">All Tags</p>
+          <p className="font-[450] mt-2 ml-[10px] text-xl">All Profiles</p>
           <div className="flex justify-around w-[190px] h-[70px] ">
             <div className="h-[75px]  w-[75px] mt-1">
               <Doughnut data={data1}></Doughnut>
             </div>
             <div>
               <h2 className="text-4xl mt-5">{allusers}</h2>
-              <p>Tags</p>
+              <p>Profiles</p>
             </div>
           </div>
         </div>
@@ -74,27 +74,27 @@ const Widgets = ({ tags }) => {
         </div> */}
 
         <div className="h-[150px] w-[240px]   rounded-lg bg-[#ffffff]  shadow-md border">
-          <p className="font-[450] mt-2 ml-[10px] text-xl">Active Tags</p>
+          <p className="font-[450] mt-2 ml-[10px] text-xl">Active Profiles</p>
           <div className="flex justify-around w-[190px] h-[70px] ">
             <div className="h-[75px]  w-[75px] mt-1">
               <Doughnut data={data2}></Doughnut>
             </div>
             <div>
               <h2 className="text-4xl mt-5">{activeUsers}</h2>
-              <p>Tags</p>
+              <p>Profiles</p>
             </div>
           </div>
         </div>
 
         <div className="h-[150px] w-[240px]   rounded-lg bg-[#ffffff]  shadow-md border">
-          <p className="font-[450] mt-2 ml-[10px] text-xl">Inactive Tags</p>
+          <p className="font-[450] mt-2 ml-[10px] text-xl">Inactive Profiles</p>
           <div className="flex justify-around w-[190px] h-[70px] ">
             <div className="h-[75px]  w-[75px] mt-1">
               <Doughnut data={data3}></Doughnut>
             </div>
             <div>
               <h2 className="text-4xl mt-5">{notActiveUsers}</h2>
-              <p>Tags</p>
+              <p>Profiles</p>
             </div>
           </div>
         </div>

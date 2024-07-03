@@ -83,14 +83,14 @@ const AddTag = () => {
       <Sidebar />
       <div className="w-[85%] flex justify-center items-center">
         <div className="w-[600px] p-6 bg-white border rounded shadow ">
-          <h2 className="text-2xl font-semibold mb-6">Add New Tag</h2>
+          <h2 className="text-2xl font-semibold mb-6">Add New QR</h2>
           {/* <form> */}
           <div className="mb-4">
             <label
               htmlFor="oldPassword"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Tag Id:
+              QR Id:
             </label>
             <input
               type="text"
@@ -119,7 +119,7 @@ const AddTag = () => {
                 Select Status
               </option>
               <option value="true">Active</option>
-              <option value="false">Not Active</option>
+              <option value="false">In Active</option>
             </select>
           </div>
           <button
@@ -127,7 +127,7 @@ const AddTag = () => {
             className=" text-white rounded py-2 px-4  bg-[#B08655] focus:outline-none focus:shadow-outline-blue"
             onClick={() => addNewTag()}
           >
-            {loading ? <CircularProgress color="inherit" /> : "Save Tag"}
+            {loading ? <CircularProgress color="inherit" /> : "Save QR"}
           </button>
           {/* </form> */}
         </div>

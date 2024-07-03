@@ -66,8 +66,8 @@ const Generate = () => {
       <Sidebar />
       <div className="w-[85%] flex justify-center items-center">
         <div className="w-[600px] p-6 bg-white border rounded shadow ">
-          <h2 className="text-2xl font-semibold mb-1">Generate Tags</h2>
-          <p>Enter number to generate tag (e.g 1,50,100)</p>
+          <h2 className="text-2xl font-semibold mb-1">Generate QRs</h2>
+          <p>Enter number to generate qr (e.g 1,50,100)</p>
           {/* <form> */}
           <div className="mt-3">
             {/* <label

@@ -10,6 +10,7 @@ import { IoPricetags } from "react-icons/io5";
 import { MdOutlinePlaylistAdd } from "react-icons/md";
 import { RiFileExcel2Fill } from "react-icons/ri";
 import { FaFileImport } from "react-icons/fa";
+import { IoQrCodeSharp } from "react-icons/io5";
 
 const Sidebar = () => {
   let navigate = useNavigate();
@@ -69,8 +70,8 @@ const Sidebar = () => {
               }
             >
               <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
-                <IoPricetags className="text-[#B08655] text-xl ml-2 " />
-                <p className="ml-[10px] text-[14px] font-[500]">Tags</p>
+                <IoQrCodeSharp className="text-[#B08655] text-xl ml-2 " />
+                <p className="ml-[10px] text-[14px] font-[500]">QR</p>
               </div>
             </div>
 
@@ -85,7 +86,7 @@ const Sidebar = () => {
             >
               <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
                 <MdOutlinePlaylistAdd className="text-[#B08655] text-2xl ml-2 " />
-                <p className="ml-[5px] text-[14px] font-[500]">Add Tag</p>
+                <p className="ml-[5px] text-[14px] font-[500]">Add QR</p>
               </div>
             </div>
 
@@ -100,9 +101,7 @@ const Sidebar = () => {
             >
               <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
                 <RiFileExcel2Fill className="text-[#B08655] text-xl ml-2 " />
-                <p className="ml-[10px] text-[14px] font-[500]">
-                  Generate Tags
-                </p>
+                <p className="ml-[10px] text-[14px] font-[500]">Generate QR</p>
               </div>
             </div>
 
@@ -117,7 +116,7 @@ const Sidebar = () => {
             >
               <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
                 <FaFileImport className="text-[#B08655] text-xl ml-2 " />
-                <p className="ml-[10px] text-[14px] font-[500]">Import Tags</p>
+                <p className="ml-[10px] text-[14px] font-[500]">Import QR</p>
               </div>
             </div>
 

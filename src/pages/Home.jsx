@@ -21,8 +21,9 @@ import Papa from "papaparse";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Widgets from "../components/widgets";
-import { QRCode } from "react-qrcode-logo";
+// import { QRCode } from "react-qrcode-logo";
 import { LuDownload } from "react-icons/lu";
+import QRCode from "qrcode";
 
 const Home = () => {
   const qrValue = import.meta.env.VITE_PROFILE_URL;
@@ -59,23 +60,51 @@ const Home = () => {
     getingdata();
   }, []);
 
-  useEffect(() => {
-    if (userTag != null) {
-      const canvas = document.getElementById("download-qr");
-      if (canvas) {
+  // useEffect(() => {
+  //   if (userTag && userTag != null) {
+  //     <div>
+  //       <QRCode
+  //         id="download-qr"
+  //         value={qrValue + "viewprofile/" + userTag}
+  //         size={150}
+  //       />
+  //     </div>;
+  //     const canvas = document.getElementById("download-qr");
+  //     if (canvas) {
+  //       const pngUrl = canvas
+  //         .toDataURL("image/png")
+  //         .replace("image/png", "image/octet-stream");
+  //       let downloadLink = document.createElement("a");
+  //       downloadLink.href = pngUrl;
+  //       downloadLink.download = `QR_Code.png`;
+  //       document.body.appendChild(downloadLink);
+  //       downloadLink.click();
+  //       document.body.removeChild(downloadLink);
+  //       setUserTag(null);
+  //     }
+  //   }
+  // }, [userTag]);
+
+  const downloadQr = async (tag) => {
+    if (tag) {
+      const qrValue2 = `${qrValue}viewprofile/${tag}`;
+      try {
+        const canvas = document.createElement("canvas");
+        await QRCode.toCanvas(canvas, qrValue2, { width: 150 });
         const pngUrl = canvas
           .toDataURL("image/png")
           .replace("image/png", "image/octet-stream");
-        let downloadLink = document.createElement("a");
+        const downloadLink = document.createElement("a");
         downloadLink.href = pngUrl;
         downloadLink.download = `QR_Code.png`;
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
-        setUserTag(null);
+      } catch (err) {
+        console.error(err);
       }
     }
-  }, [userTag]);
+  };
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -154,7 +183,7 @@ const Home = () => {
       sortable: false,
     },
     {
-      name: "Tag Id",
+      name: "QR Id",
       selector: (row) => {
         return row.tagId;
       },
@@ -171,11 +200,11 @@ const Home = () => {
     {
       name: "QR-code",
       cell: (row) => (
-        <div className="flex ">
+        <div className="flex">
           <button
             className="h-[40px] w-[100px] border bg-[#B08655] rounded-md text-white flex gap-1 justify-center items-center  "
             onClick={() => {
-              setUserTag(row?.tagId);
+              downloadQr(row?.tagId);
             }}
           >
             Download
@@ -243,14 +272,6 @@ const Home = () => {
     <div className="w-[100%] flex max-h-[100vh] ">
       <Sidebar />
       <div className="w-[85%] h-[100vh] overflow-y-scroll">
-        <div style={{ display: "none" }}>
-          <QRCode
-            id="download-qr"
-            value={qrValue + "viewprofile/" + userTag}
-            size={150}
-          />
-        </div>
-
         <DellModal
           handleDelModal={handleDelModal}
           DelModal={DelModal}
@@ -282,7 +303,7 @@ const Home = () => {
                     }}
                   />{" "}
                   <div className="w-[35%]  h-[70px] flex items-center justify-end">
-                    <div className="w-[25%] h-[40px]  flex justify-center items-center text-white hover:bg-[#b2d9ee] bg-[#B08655] rounded-lg cursor-pointer">
+                    <div className="w-[25%] h-[40px]  flex justify-center items-center text-white bg-[#B08655] rounded-lg cursor-pointer">
                       <DownloadExcel Data={filtered} />
                     </div>
                   </div>
