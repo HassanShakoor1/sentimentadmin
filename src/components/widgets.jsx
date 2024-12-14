@@ -27,7 +27,7 @@ const Widgets = ({ tags }) => {
       {
         label: "Total profiles",
         data: [allusers],
-        backgroundColor: ["#B08655"],
+        backgroundColor: ["#062A27"],
       },
     ],
   };
@@ -37,7 +37,7 @@ const Widgets = ({ tags }) => {
     datasets: [
       {
         data: [allusers, activeUsers],
-        backgroundColor: ["#B08655", "#00c867"],
+        backgroundColor: ["#062A27", "#00c867"],
       },
     ],
   };
@@ -47,7 +47,7 @@ const Widgets = ({ tags }) => {
     datasets: [
       {
         data: [allusers, notActiveUsers],
-        backgroundColor: ["#B08655", "red"],
+        backgroundColor: ["#062A27", "red"],
       },
     ],
   };

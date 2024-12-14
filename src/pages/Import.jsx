@@ -71,7 +71,7 @@ const Import = () => {
     } else {
       toast?.error("Please select the file");
     }
-  };
+};
 
   return (
     <div className="w-[100%] flex">
@@ -102,7 +102,7 @@ const Import = () => {
 
           <button
             // type="submit"
-            className=" text-white rounded h-[40px] flex items-center justify-center w-[100px] py-2 px-4 hover:bg-[#b2d9ee] bg-[#B08655] focus:outline-none focus:shadow-outline-blue mt-3"
+            className=" text-white rounded h-[40px] flex items-center justify-center w-[100px] py-2 px-4 hover:bg-[#b2d9ee] bg-[#062A27] focus:outline-none focus:shadow-outline-blue mt-3"
             onClick={() => uploadBulk()}
           >
             {loading ? <CircularProgress color="inherit" size={25} /> : "Save"}

@@ -190,7 +190,7 @@ const Home = () => {
       sortable: true,
     },
     {
-      name: "Assigned To",
+      name: "User-Id",
       selector: (row) => {
         return row.userid;
       },
@@ -202,7 +202,7 @@ const Home = () => {
       cell: (row) => (
         <div className="flex">
           <button
-            className="h-[40px] w-[100px] border bg-[#B08655] rounded-md text-white flex gap-1 justify-center items-center  "
+            className="h-[40px] w-[100px] border bg-[#062A27] rounded-md text-white flex gap-1 justify-center items-center  "
             onClick={() => {
               downloadQr(row?.tagId);
             }}
@@ -303,7 +303,7 @@ const Home = () => {
                     }}
                   />{" "}
                   <div className="w-[35%]  h-[70px] flex items-center justify-end">
-                    <div className="w-[25%] h-[40px]  flex justify-center items-center text-white bg-[#B08655] rounded-lg cursor-pointer">
+                    <div className="w-[25%] h-[40px]  flex justify-center items-center text-white bg-[#062A27] rounded-lg cursor-pointer">
                       <DownloadExcel Data={filtered} />
                     </div>
                   </div>

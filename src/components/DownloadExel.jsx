@@ -8,8 +8,8 @@ const DownloadExcel = ({ Data }) => {
     return {
       QR_Id: item?.tagId,
       QR: baseUrl + "qr/" + item?.tagId,
-      Status: item?.status,
-      User_Name: item?.userid,
+      Status: item?.status ? "Active" : "In-Active",
+      User_Id: item?.userid,
       QR_URL: baseUrl + "viewprofile/" + item?.tagId,
     };
   });

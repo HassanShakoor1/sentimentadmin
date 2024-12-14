@@ -91,7 +91,7 @@ const Generate = () => {
 
           <button
             // type="submit"
-            className=" text-white rounded h-[40px] w-[100px] py-2 px-4 hover:bg-[#b2d9ee] bg-[#B08655] focus:outline-none focus:shadow-outline-blue mt-3"
+            className=" text-white rounded h-[40px] w-[100px] py-2 px-4 hover:bg-[#b2d9ee] bg-[#062A27] focus:outline-none focus:shadow-outline-blue mt-3"
             onClick={() => generateTags()}
           >
             {loading ? (

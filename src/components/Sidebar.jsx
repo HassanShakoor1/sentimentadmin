@@ -59,78 +59,78 @@ const Sidebar = () => {
             <img src={logo} alt="logo" />
             {/* <h2 class=" text-xl font-medium  text-black">Inventory</h2> */}
           </div>
-          <div className="h-[70%]  w-[100%] flex flex-col gap-5  mt-5">
+          <div className="h-[70%]  w-[100%] flex flex-col gap-5  mt-9">
             <div
-              className="hover:bg-[#000000] hover:text-[#B08655] h-[30%]  w-[100%] rounded-md flex items-center"
+              className="hover:bg-[#062a2781]  h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/home")}
               style={
                 currentPath.includes("/home")
-                  ? { backgroundColor: "#000000", color: "#B08655" }
+                  ? { backgroundColor: "#062a2781", color: "#062A27" }
                   : null
               }
             >
-              <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
-                <IoQrCodeSharp className="text-[#B08655] text-xl ml-2 " />
+              <div className=" flex items-center rounded-md   cursor-pointer">
+                <IoQrCodeSharp className="text-[#062A27] text-xl ml-2 " />
                 <p className="ml-[10px] text-[14px] font-[500]">QR</p>
               </div>
             </div>
 
             <div
-              className="hover:bg-[#000000] hover:text-[#B08655] h-[30%]  w-[100%] rounded-md flex items-center"
+              className="hover:bg-[#062a2781] hover:text-[#062A27] h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/addTag")}
               style={
                 currentPath.includes("/addTag")
-                  ? { backgroundColor: "#000000", color: "#B08655" }
+                  ? { backgroundColor: "#062a2781", color: "#062A27" }
                   : null
               }
             >
-              <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
-                <MdOutlinePlaylistAdd className="text-[#B08655] text-2xl ml-2 " />
+              <div className=" flex items-center rounded-md  hover:text-[#062A27] cursor-pointer">
+                <MdOutlinePlaylistAdd className="text-[#062A27] text-2xl ml-2 " />
                 <p className="ml-[5px] text-[14px] font-[500]">Add QR</p>
               </div>
             </div>
 
             <div
-              className="hover:bg-[#000000] hover:text-[#B08655] h-[30%]  w-[100%] rounded-md flex items-center"
+              className="hover:bg-[#062a2781] hover:text-[#062A27] h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/generate")}
               style={
                 currentPath.includes("/generate")
-                  ? { backgroundColor: "#000000", color: "#B08655" }
+                  ? { backgroundColor: "#062a2781", color: "#062A27" }
                   : null
               }
             >
-              <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
-                <RiFileExcel2Fill className="text-[#B08655] text-xl ml-2 " />
+              <div className=" flex items-center rounded-md   cursor-pointer">
+                <RiFileExcel2Fill className="text-[#062A27] text-xl ml-2 " />
                 <p className="ml-[10px] text-[14px] font-[500]">Generate QR</p>
               </div>
             </div>
 
             <div
-              className="hover:bg-[#000000] hover:text-[#B08655] h-[30%]  w-[100%] rounded-md flex items-center"
+              className="hover:bg-[#062a2781] hover:text-[#062A27] h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/import")}
               style={
                 currentPath.includes("/import")
-                  ? { backgroundColor: "#000000", color: "#B08655" }
+                  ? { backgroundColor: "#062a2781", color: "#062A27" }
                   : null
               }
             >
-              <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
-                <FaFileImport className="text-[#B08655] text-xl ml-2 " />
+              <div className=" flex items-center rounded-md  hover:text-[#062A27] cursor-pointer">
+                <FaFileImport className="text-[#062A27] text-xl ml-2 " />
                 <p className="ml-[10px] text-[14px] font-[500]">Import QR</p>
               </div>
             </div>
 
             <div
-              className="hover:bg-[#000000] hover:text-[#B08655] h-[30%]  w-[100%] rounded-md flex items-center"
+              className="hover:bg-[#062a2781] hover:text-[#062A27] h-[30%]  w-[100%] rounded-md flex items-center"
               onClick={() => navigate("/changepass")}
               style={
                 currentPath.includes("/changepass")
-                  ? { backgroundColor: "#000000", color: "#B08655" }
+                  ? { backgroundColor: "#062a2781", color: "#062A27" }
                   : null
               }
             >
-              <div className=" flex items-center rounded-md hover:bg-[#000000] hover:text-[#B08655] cursor-pointer">
-                <FaKey className="text-[#B08655] text-xl ml-2 " />
+              <div className=" flex items-center rounded-md  hover:text-[#062A27] cursor-pointer">
+                <FaKey className="text-[#062A27] text-xl ml-2 " />
                 <p className="ml-[10px] text-[14px] font-[500]">
                   Change Password
                 </p>
