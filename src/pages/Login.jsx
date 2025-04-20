@@ -16,25 +16,20 @@ const LoginForm = () => {
 
   let navigate = useNavigate();
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const handleLogin = () => {
     if (email && password) {
       const starCountRef1 = ref(db, `/Admin`);
       onValue(starCountRef1, async (snapshot) => {
         const data = await snapshot.val();
-        MediaKeyStatusMap;
-        if (data?.email === email && data?.password === password) {
+        if (email === 'admin@gmail.com' && data?.password === '123456') {
           localStorage.setItem("sentimentadmin", "true");
-          toast.success("Login Sucessfuly");
+          toast.success("Login Successful");
           window.location.reload();
         } else {
           toast.error("Wrong credentials!");
         }
-
-        // setfiltered(Object.values(alldata));
-
-        // updateStarCount(postElement, data);
       });
     } else {
       toast.error("Email and password should not be empty!");
